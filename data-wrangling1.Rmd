@@ -1,0 +1,118 @@
+---
+title: "Making and indexing data in R"
+author: "Peter Menzies"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+## Make some vectors and check them out
+
+```{r}
+cats <- c("monkey", 40, "panda", "sandwich", TRUE, 5L)
+
+# check the class of cats
+class(cats)
+```
+
+```{r}
+cat_age <- c(1.4, 5.2, 6, 10)
+class(cat_age)
+# more specfic than numeric:
+typeof(cat_age)
+
+is.character(cat_age)
+is.character(cats)
+```
+
+```{r}
+dog_food <- c(teddy = "purina",
+              khora = "alpo",
+              waffle = "fancy feast",
+              banjo = "blue diamond")
+
+dog_food
+class(dog_food)
+
+dog_food[2]
+dog_food["khora"]
+
+khora_food <- dog_food["khora"]
+khora_food
+```
+
+```{r}
+cars <- c("tesla", "nissan", "ford", "toyota", "subaru", "honda")
+
+cars[2:5]
+
+i <- c(1, 2, 5)
+cars[i]
+
+cars[i] <- "Burritos"
+```
+
+
+## Lists in R
+
+Lists are heterogeneous
+
+```{r}
+urchins <- list("blue", 
+                c(1, 2, 3),
+                seq(from = 0, to = 100),
+                FALSE, 
+                1200L)
+
+urchins
+
+# two brackets outputs the actual element - single brackets output a list containing just the indexed element(s)
+```
+
+```{r}
+tacos <- list(topping = c("onions", "guac", "sauce"),
+              filling = c("beans", "meat", "veggies"),
+              price = c(6.75, 8.25, 9.50))
+
+as.data.frame(tacos)
+
+taco_price <- tacos[[3]]
+
+# tacos[3] outputs a list
+
+is.vector(taco_price)
+
+# outputs vector same as double square brackets
+tacos$filling
+```
+
+## Data frames
+
+```{r}
+fruit <- data.frame(type = c("apple", "banana", "pawpaw"),
+                    mass = c(130, 195, 150))
+
+class(fruit$type)
+
+# Always important to check class of data!!!
+
+banana_mass <- fruit[[2, 2]]
+
+# same thing:
+fruit$type
+fruit[, 1]
+# ^ all the rows in column one
+
+# row 3, column 1
+fruit[[3, 1]]
+```
+
+
+
+
+
